@@ -20,17 +20,17 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
+package edu.harvard.sorgerlab.sdcubeio;
 
 import ncsa.hdf.hdf5lib.HDF5Constants;
 
 /**
+ * Generic 1 dimensional data object
  * 
- * Generic 2 dimensional data object
- * 
+ * @author Bjorn Millard & Michael Menden
  */
-public class Data_2D<T> implements DataObject {
-
+public class Data_1D<T> implements DataObject {
+	
 	static public String DOUBLE = "DOUBLE";
 	static public String INTEGER = "INTEGER";
 	static public String SHORT = "SHORT";
@@ -38,55 +38,52 @@ public class Data_2D<T> implements DataObject {
 	static public String BYTE = "BYTE";
 	static public String STRING = "STRING";
 
-	private T[][] data;
+	private T[] data;
 	private int hdfType;
 	private String name;
 	private String dataType;
 
-	public Data_2D(T[][] data, String dataType, String name) {
+	public Data_1D(T[] data, String dataType, String name) {
 		this.name = name;
 		this.data = data;
 		this.dataType = dataType;
 
-		String tmp = data.getClass().getSimpleName();
-		String type = tmp.substring(0, tmp.indexOf('['));
-		if (type.toUpperCase().compareTo("INT") == 0
-				|| type.toUpperCase().compareTo("INTEGER") == 0)
+		if (dataType.equalsIgnoreCase("INT")
+				|| dataType.equalsIgnoreCase("INTEGER"))
 			hdfType = HDF5Constants.H5T_NATIVE_INT;
-		else if (type.toUpperCase().compareTo("SHORT") == 0)
+		else if (dataType.equalsIgnoreCase("Short"))
 			hdfType = HDF5Constants.H5T_NATIVE_SHORT;
-		else if (type.toUpperCase().compareTo("FLOAT") == 0)
+		else if (dataType.equalsIgnoreCase("Float"))
 			hdfType = HDF5Constants.H5T_NATIVE_FLOAT;
-		else if (type.toUpperCase().compareTo("DOUBLE") == 0)
+		else if (dataType.equalsIgnoreCase("Double"))
 			hdfType = HDF5Constants.H5T_NATIVE_DOUBLE;
-		else if (type.toUpperCase().compareTo("BYTE") == 0)
+		else if (dataType.equalsIgnoreCase("Byte"))
 			hdfType = HDF5Constants.H5T_NATIVE_CHAR;
 		else if (dataType.equalsIgnoreCase("String"))
 			hdfType = HDF5Constants.H5T_NATIVE_SCHAR;
 	}
 
 	/**
-	 * Get the data matrix.
+	 * Get the data array.
 	 * 
 	 * @param null
-	 * @return T[][] DataObjectInGenericForm
+	 * @return T[] DataObjectInGenericForm
 	 * @author Bjorn Millard & Michael Menden
 	 */
-	public T[][] getData() {
+	public T[] getData() {
 		return data;
 	}
 
-	/**
-	 * Get a single element of the data matrix.
-	 * 
-	 * @author Bjorn Millard & Michael Menden
-	 * @param int index_0, int index_1
-	 * @return <T> dataObject
-	 */
-	public T getElem(int i, int j) {
-		return data[i][j];
+	/** 
+	 * Returns the dimenionality rank of this dataset
+	 * @author Bjorn Millard
+	 * @return int rank
+	 * */
+	public int getRank()
+	{
+		return 1;
 	}
-
+	
 	/**
 	 * Get the HDF type.
 	 * 
@@ -106,7 +103,7 @@ public class Data_2D<T> implements DataObject {
 	 * @author Bjorn Millard & Michael Menden
 	 */
 	public long[] getDimensions() {
-		return new long[] { data.length, data[0].length };
+		return new long[] { data.length };
 	}
 
 	/**
@@ -120,6 +117,7 @@ public class Data_2D<T> implements DataObject {
 	public String getDataType() {
 		return dataType;
 
+		// System.out.println("type: " + hdfType);
 		// if (hdfType == HDF5Constants.H5T_NATIVE_INT)
 		// return "Integer";
 		// else if (hdfType == HDF5Constants.H5T_NATIVE_FLOAT)
@@ -130,19 +128,11 @@ public class Data_2D<T> implements DataObject {
 		// return "Short";
 		// else if (hdfType == HDF5Constants.H5T_NATIVE_CHAR)
 		// return "Byte";
+		// else if (hdfType == HDF5Constants.H5T_NATIVE_SCHAR)
+		// return "String";
 		// return "null";
 	}
 
-	/** 
-	 * Returns the dimenionality rank of this dataset
-	 * @author Bjorn Millard
-	 * @return int rank
-	 * */
-	public int getRank()
-	{
-		return 2;
-	}
-	
 	/**
 	 * Returns the name of this DataObject
 	 * 
@@ -152,7 +142,7 @@ public class Data_2D<T> implements DataObject {
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Prints out the critical data for this object
 	 * */
@@ -161,7 +151,8 @@ public class Data_2D<T> implements DataObject {
 		st += "Name: " + name + "\n";
 		st += "DataType: " + dataType + "\n";
 		st += "HDFType: " + hdfType + "\n";
-		st += "Dimensions: " + data.length + " x " + data[0].length + "\n";
+		st += "Dimensions: " + data.length + "\n";
 		return st;
 	}
+	
 }

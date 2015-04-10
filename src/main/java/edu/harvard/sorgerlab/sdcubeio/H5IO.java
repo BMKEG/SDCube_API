@@ -20,7 +20,7 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
+package edu.harvard.sorgerlab.sdcubeio;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -207,15 +207,34 @@ public class H5IO<T> {
 
 		String[] objNames = new String[numC];
 		int[] objTypes = new int[numC];
+		long[] objRefs = new long[numC];
 
 		try {
-			int names_found = H5.H5Gget_obj_info_all(file_id, pathToGroup,
-					objNames, objTypes);
+			
+			// TODO: This line was previously:
+			//int names_found = H5.H5Gget_obj_info_all(file_id, pathToGroup,
+			//		objNames, objTypes);
+			//
+			// but that threw an compile error within HDF5, since the code changed.
+			//
+			// GULLY: this is pure hacking, trying to get the system to run with no real
+			// understanding of what the calls mean. Need to understand in much 
+			// more detail. 
+			//
+			//int names_found = H5.H5Gget_obj_info_all(file_id, pathToGroup,
+			//		objNames, objTypes, objRefs);
+			// This throws an error based on the lType being null (the 5th variable 
+			//      in the function call).
+			//
+			// Instead, try this.
+			int names_found = H5.H5Gget_obj_info_full(file_id, pathToGroup, objNames, 
+					objTypes, null, null, objRefs, HDF5Constants.H5_INDEX_NAME, -1);
+
+			
 		} catch (Throwable err) {
 			err.printStackTrace();
 		}
 		closeGroup();
-
 
 		return objNames;
 	}

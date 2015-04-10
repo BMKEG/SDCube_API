@@ -20,7 +20,7 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
+package edu.harvard.sorgerlab.sdcubeio;
 
 import java.util.ArrayList;
 

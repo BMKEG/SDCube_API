@@ -20,7 +20,7 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
+package edu.harvard.sorgerlab.sdcubeio;
 
 /**
  * Exception thrown during reading,writing and manipulating HDF5 files

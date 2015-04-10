@@ -20,12 +20,11 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
-
+package edu.harvard.sorgerlab.sdcubeio;
 
 /**
- * This class is an ExpDesign_Description object, which could be a treatment, measurement,
- * time point, etc. of a sample.
+ * This class is an ExpDesign_Description object, which could be a treatment,
+ * measurement, time point, etc. of a sample.
  * 
  * @author Bjorn Millard & Michael Menden
  * 
@@ -59,8 +58,8 @@ public class ExpDesign_Description {
 	 *            Generic category marker. Example could be: ligand, drug, cell
 	 *            line, etc...
 	 */
-	public ExpDesign_Description(String type, String name, String value, String units,
- String timeValue, String timeUnits, String category) {
+	public ExpDesign_Description(String type, String name, String value,
+			String units, String timeValue, String timeUnits, String category) {
 		if (type == null)
 			type = "";
 		if (name == null)
@@ -84,7 +83,6 @@ public class ExpDesign_Description {
 		this.time_units = timeUnits;
 		this.category = category;
 	}
-	
 
 	/** Empty constructor */
 	public ExpDesign_Description() {
@@ -92,6 +90,7 @@ public class ExpDesign_Description {
 
 	/**
 	 * Get Description type (ex: Treatment, Measurement, etc...)
+	 * 
 	 * @author Bjorn Millard
 	 * @return String type
 	 */
@@ -99,7 +98,6 @@ public class ExpDesign_Description {
 		return type;
 	}
 
-	
 	/**
 	 * Get the name of the description. In case of an treatment it could be
 	 * "EGF"
@@ -176,7 +174,6 @@ public class ExpDesign_Description {
 		type = st;
 	}
 
-
 	/**
 	 * set the name of the description. In case of an treatment it could be
 	 * "EGF"
@@ -242,8 +239,7 @@ public class ExpDesign_Description {
 	 * @return Returns a description of this object.
 	 */
 	public String toString() {
-		if (value != null && !value.equalsIgnoreCase(""))
- {
+		if (value != null && !value.equalsIgnoreCase("")) {
 			if (type == null)
 				type = "";
 			if (name == null)
@@ -260,10 +256,8 @@ public class ExpDesign_Description {
 				category = "";
 
 			return category + ": " + name + " (" + value + " " + units
-					+ ")   @t=" + time + " "
-					+ time_units;
-		}
- else if (type.equalsIgnoreCase("Measurement_Time")) {
+					+ ")   @t=" + time + " " + time_units;
+		} else if (type.equalsIgnoreCase("Measurement_Time")) {
 			return "Time Point = " + time + " " + time_units;
 		}
 		return name;
@@ -292,14 +286,16 @@ public class ExpDesign_Description {
 			return false;
 		return true;
 	}
-	
-	/** 
+
+	/**
 	 * Writes this ExpDesign_Description to the XML file of the SDCube
+	 * 
 	 * @author Bjorn Millard
-	 * @param String h5FilePathForSDCube
+	 * @param String
+	 *            h5FilePathForSDCube
 	 * */
-	public void write(String h5FilePath)
-	{
+	public void write(String h5FilePath) {
+
 		
 	}
 
@@ -313,5 +309,5 @@ public class ExpDesign_Description {
 		return new ExpDesign_Description(type, name, value, units, time,
 				time_units, category);
 	}
-	
+
 }

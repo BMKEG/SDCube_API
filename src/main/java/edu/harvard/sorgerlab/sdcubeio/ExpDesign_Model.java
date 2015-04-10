@@ -20,13 +20,11 @@
    <http://www.gnu.org/licenses/>.
  */
 
-package sdcubeio;
+package edu.harvard.sorgerlab.sdcubeio;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-
-
 
 public class ExpDesign_Model {
 
@@ -43,8 +41,7 @@ public class ExpDesign_Model {
 
 		File f = new File(xmlPath);
 
-		if (f.exists())
- {
+		if (f.exists()) {
 			TheExpDesigns = ExpDesign_IO.parseSamples(xmlPath);
 		}
 
@@ -73,7 +70,8 @@ public class ExpDesign_Model {
 	public ExpDesign_Sample getSample(String sampleID) {
 
 		for (int i = 0; i < TheExpDesigns.size(); i++) {
-			if (TheExpDesigns.get(i).getId().trim().equalsIgnoreCase(sampleID.trim()))
+			if (TheExpDesigns.get(i).getId().trim()
+					.equalsIgnoreCase(sampleID.trim()))
 				return TheExpDesigns.get(i);
 		}
 
@@ -81,7 +79,6 @@ public class ExpDesign_Model {
 		TheExpDesigns.add(sam);
 		return sam;
 	}
-
 
 	/**
 	 * Returns the XML file path
@@ -118,29 +115,28 @@ public class ExpDesign_Model {
 	}
 
 	/**
-	 * Removes an ExpDesign_Sample from the collection in this project.  
-	 * Note this only gets added to to the model and isnt writen out to the XML
-	 * until the write() method is called.
+	 * Removes an ExpDesign_Sample from the collection in this project. Note
+	 * this only gets added to to the model and isnt writen out to the XML until
+	 * the write() method is called.
 	 * 
 	 * @author Bjorn Millard
-	 * @param String sampleID
+	 * @param String
+	 *            sampleID
 	 * @return void
 	 * */
 	public void removeSample(String id) {
 		int len = TheExpDesigns.size();
-		for(int i = 0; i < len; i++)
-		{
+		for (int i = 0; i < len; i++) {
 			ExpDesign_Sample sam = TheExpDesigns.get(i);
-			if(sam.getId().equalsIgnoreCase(id))
-			{
+			if (sam.getId().equalsIgnoreCase(id)) {
 				TheExpDesigns.remove(i);
 				i--;
 				len--;
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Remove description from the given sample with given sampleID
 	 * 
@@ -276,8 +272,6 @@ public class ExpDesign_Model {
 		return getDescription(sampleID, "Measurement_Time");
 	}
 
-
-
 	/**
 	 * Returns an array of all descriptors contained within the given sampleID
 	 * of the given descriptionType. Note the descType is typically:
@@ -344,7 +338,6 @@ public class ExpDesign_Model {
 		return arr;
 	}
 
-
 	/**
 	 * Adds the given sample description to the given sample with this model of
 	 * the given ID
@@ -357,15 +350,13 @@ public class ExpDesign_Model {
 	 * */
 	public void addDescription(String sampleID, ExpDesign_Description desc) {
 		ExpDesign_Sample sam = getSample(sampleID);
-		if (sam != null)
- {
+		if (sam != null) {
 			sam.addDescription(desc);
 			// System.out
 			// .println("Adding Description to ExpDesign_Sample with ID: "
 			// + sampleID);
 			// System.out.println("--Complete Model:\n" + toString());
-		}
-		else {
+		} else {
 			System.out.println("ERROR: no ExpDesign_Sample with ID: "
 					+ sampleID);
 			// System.out.println("--Complete Model:\n" + toString());
@@ -398,7 +389,6 @@ public class ExpDesign_Model {
 		}
 	}
 
-
 	/**
 	 * Print out of the model
 	 * 
@@ -427,4 +417,3 @@ public class ExpDesign_Model {
 	}
 
 }
-
