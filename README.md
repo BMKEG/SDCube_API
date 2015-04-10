@@ -6,7 +6,7 @@ Structured storage of large biological data sets.
 Copyright (C) 2011 Bjorn Millard <bjornmillard@gmail.com>
 License: LGPL v3, see LICENSE.txt and COPYING.txt
 
-1. Introduction
+# Introduction
 
 This is a port of the original SDCube API library by Gully Burns at the 
 Information Sciences Institute. Our goals were to create a functional 
@@ -17,7 +17,7 @@ semantic web elements.
 
 The SDCube webpage is at http://www.semanticbiology.com/software/sdcube
 
-2. Requirements
+# Requirements
 
 * Java 1.7 - http://www.java.com/
 
@@ -40,7 +40,7 @@ these within our local Nexus repository:
 This is not a good solution going forward, but will serve the temporary needs 
 of this port. 
 
-2. Running the SDCube Tests
+# Running the SDCube Tests
 
 To check the installation is working, we recommend running the unit tests under
 `edu.harvard.sorgerlab.sdcubeio`. Again, we are using this product primarily as 
