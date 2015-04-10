@@ -145,8 +145,6 @@ public class SDCubeTest {
 				"./Children/5");
 		d6.addData(new Data_1D(array, "FLOAT", "floatARR"));
 		sdc.addSample(new SDCube_Sample(d6, sam6, "ID_6"));
-
-		
 		
 		// Trying to write it out
 		try {
